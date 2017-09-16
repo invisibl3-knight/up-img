@@ -22,7 +22,7 @@ Class Database{
 	
 	
 	// Image insert
-	public function insert($query){
+	public function upload($query){
 		$insert_row = $this->link->query($query) or die ($this->link->error__LINE__);
 		if($insert_row){
 			return $insert_row;

@@ -10,8 +10,8 @@
  .headeroption h2, .footeroption h2{margin: 0}
  .mainoption{min-height: 420px;padding: 20px}
  .myform{width: 500px;border: 1px solid  #999;margin: 0 auto; 
-  .success{color:green;font-size:18px;display:block;margin-top:10px;}
-   .error{color:red;font-size:18px;display:block;margin-top:10px;}
+ .success{color:green;font-size:18px;display:block;margin-top:10px;}
+ .error{color:red;font-size:18px;display:block;margin-top:10px;}
  padding: 10px 20px 20px;}
  input[type="submit"],input[type="file"]{cursor: pointer}
  
