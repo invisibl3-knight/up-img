@@ -16,10 +16,16 @@ if(isset($_POST['submit'])){
 	$img_name = $_FILES['image']['name'];
 	$img_size = $_FILES['image']['size'];
 	$img_tmp_name = $_FILES['image']['tmp_name'];
-	$folder = "uploads/";
-	move_uploaded_file($img_tmp_name,$folder.$img_name);
 	
-	$query = "INSERT INTO tbl_img(image) VALUES('$img_name')";
+	$img_explode = explode('.',$img_name);
+	//print_r($img_explode);
+	$img_ext  = strtolower(end($img_explode));
+	$img_uname = substr(md5(time()),0,10).'.'.$img_ext;
+	$img_fname = "uploads/".$img_uname;
+	
+	move_uploaded_file($img_tmp_name,$img_fname);
+	
+	$query = "INSERT INTO tbl_img(image) VALUES('$img_fname')";
 	$upload = $db->upload($query);
 	if($upload){
 		echo "<span class='success'>Image Uploaded Successfullly</span>";
