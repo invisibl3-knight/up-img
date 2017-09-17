@@ -59,6 +59,20 @@ if(isset($_POST['submit'])){
 			
 		</table>
 	</form>
+	
+<?php
+$query = "SELECT * FROM tbl_img ORDER BY id DESC LIMIT 1";
+$read = $db->read($query);
+if ($read){
+	while ($image = $read->fetch_assoc()){
+?>
+<img src="<?php echo $image['image'];?>" alt="" height="200px" width="200px" />		
+		
+		
+<?php		
+	}
+}
+?>
 	</div>
 <?php include 'inc/footer.php';?>
 
