@@ -60,19 +60,67 @@ if(isset($_POST['submit'])){
 		</table>
 	</form>
 	
+
+	
+<table width="100%">
+<tr>
+	<th width="30%">Serial</th>
+	<th width="40%">Image</th>
+	<th width="30%">Action</th>
+</tr>
+
+
+<!-- Delete Query-->
 <?php
-$query = "SELECT * FROM tbl_img ORDER BY id DESC LIMIT 1";
+if(isset($_GET['del'])){
+	$id = $_GET['del'];
+	
+	
+	$ulquery = "SELECT * FROM tbl_img WHERE id = $id";
+	$ulread = $db->read($ulquery);
+
+if($ulread){
+		while ($ulimage = $ulread->fetch_assoc()){
+		$ulupimg = $ulimage['image'];
+		unlink($ulupimg);
+	}
+}
+
+$query = "DELETE FROM tbl_img where id = $id";
+$del_img = $db->delete($query);
+	if($del_img){
+		echo "<span class='success'>Image Deleted Successfullly!</span>";
+	}else{
+		echo "<span class='error'>Image not Deleted!</span>";
+	}
+}
+?>
+
+
+
+
+<!-- Read Query-->
+<?php
+$query = "SELECT * FROM tbl_img";
 $read = $db->read($query);
+$i=0;
 if ($read){
 	while ($image = $read->fetch_assoc()){
+		$i++;
 ?>
-<img src="<?php echo $image['image'];?>" alt="" height="200px" width="200px" />		
-		
-		
+
+<tr>
+	<td><?php echo $i;?></td>
+	<td><img src="<?php echo $image['image'];?>" alt="" height="50px" width="40px" />	</td>
+	<td><a href="?del=<?php echo $image['id'];?>">Delete</a></td>
+</tr>
 <?php		
 	}
 }
 ?>
+</table>
+		
+
 	</div>
 <?php include 'inc/footer.php';?>
 

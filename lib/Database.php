@@ -42,8 +42,18 @@ Class Database{
 			return false;
 		}
 	}
-
-
+	//Delete Image
+	public function delete($data){
+		$delete_row = $this->link->query($data) or die ($this->link->error__LINE__);
+		if($delete_row){
+			return $delete_row;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
 	
 }
 
